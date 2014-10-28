@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AnnasToDoList</string>
+    <string name="toDo_title_hint">Add a new task my love!</string>
+    <string name="ToDo_title_label">TITLE</string>
+    <string name="ToDo_details_label">DETAILS</string>
+    <string name="ToDo_solved_label">Did you finish this?</string>
+    <string name="ToDos_title">Tasks</string>
+    <string name="date_picker_title">Date of task</string>
+    <string name="new_todo">New Task</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle">If you see something, say something.</string>
+    <string name="delete_todo">Delete</string>
+
+
+</resources>
