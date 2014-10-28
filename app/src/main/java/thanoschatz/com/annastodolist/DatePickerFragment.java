@@ -1,7 +1,7 @@
 package thanoschatz.com.annastodolist;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.DatePicker.OnDateChangedListener;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,16 +19,15 @@ import java.util.GregorianCalendar;
 
 public class DatePickerFragment extends DialogFragment {
 
-    public static final String EXTRA_DATE = "thanoschatz.com.annastodolist.mDate";
+    public static final String EXTRA_DATE = "thanoschatz.com.annastodolist.date";
     private static final String TAG = "DatePickerFragment";
-
 
 
     private Date mDate;
 
     public static DatePickerFragment newInstance(Date mDate) {
         Bundle args = new Bundle();
-        args.putSerializable(EXTRA_DATE,mDate);
+        args.putSerializable(EXTRA_DATE, mDate);
 
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
@@ -61,24 +61,24 @@ public class DatePickerFragment extends DialogFragment {
 
         Log.d(TAG, "date before is" + mDate.toString());
 
+
         View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_date, null);
         DatePicker dp = (DatePicker) v.findViewById(R.id.dialog_date_datepicker);
-        dp.init(year, month, day, new DatePicker.OnDateChangedListener() {
-
+        dp.init(Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
             @Override
-            public void onDateChanged(DatePicker view, int year, int month, int day) {
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Log.d(TAG, "datechanged initialized ");
-                mDate = new GregorianCalendar(year, month, day).getTime();
+                mDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
                 Log.d(TAG, "date is stored ");
                 Log.d(TAG, "date is" + mDate.toString());
 
-                getArguments().putSerializable(EXTRA_DATE, mDate);
 
             }
-
         });
 
-        return new DatePickerDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setView(v) //
                 .setTitle(R.string.date_picker_title) //
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -88,18 +88,9 @@ public class DatePickerFragment extends DialogFragment {
                         Log.d(TAG, "info sent back to fragment");
                     }
                 })
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        sendResult(Activity.RESULT_CANCELED);
-                    }
-                })
-
                 .create();
 
     }
-
-
 
 
 }

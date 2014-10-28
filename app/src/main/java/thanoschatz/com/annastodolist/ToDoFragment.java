@@ -70,6 +70,7 @@ public class ToDoFragment extends Fragment {
         if (requestCode == REQUEST_DATE) {
             Date date = (Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mToDo.setDate(date);
+
             Log.d("TAG","RECEIVED DATE");
             SimpleDateFormat simpleDateFormat = getSimpleDateFormat();
 
@@ -83,6 +84,8 @@ public class ToDoFragment extends Fragment {
 
     private void updateDate(SimpleDateFormat simpleDateFormat) {
         mDateButton.setText(simpleDateFormat.format(mToDo.getDate()));
+        Log.d("TAG","TEXT SET");
+
     }
 
     public static ToDoFragment newInstance(UUID mId) {
@@ -109,7 +112,7 @@ public class ToDoFragment extends Fragment {
     private void wireDateButton(View view) {
         SimpleDateFormat dateFormatter = getSimpleDateFormat();
         mDateButton = (Button)view.findViewById(R.id.toDo_date);
-        updateDate(dateFormatter);
+
 
         mDateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -119,6 +122,7 @@ public class ToDoFragment extends Fragment {
                 datePicker.show(fragmentManager, DIALOG_DATE);
             }
         });
+        updateDate(dateFormatter);
 
     }
 
