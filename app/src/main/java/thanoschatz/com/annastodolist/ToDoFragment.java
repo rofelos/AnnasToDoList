@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,6 +34,7 @@ public class ToDoFragment extends Fragment {
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mDoneCheckBox;
+    private ImageButton mPhotoButton;
 
 
     @Override
@@ -56,6 +58,8 @@ public class ToDoFragment extends Fragment {
         wireTitleField(view);
         wireDateButton(view);
         wireSolvedCheckBox(view);
+        wirePhotoButton(view);
+
         return  view;
     }
 
@@ -98,7 +102,10 @@ public class ToDoFragment extends Fragment {
         return fragment;
     }
 
+
+
     private void wireSolvedCheckBox(View view) {
+
         mDoneCheckBox = (CheckBox)view.findViewById(R.id.Todo_done);
         mDoneCheckBox.setChecked(mToDo.isDone());
         mDoneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -112,8 +119,6 @@ public class ToDoFragment extends Fragment {
     private void wireDateButton(View view) {
         SimpleDateFormat dateFormatter = getSimpleDateFormat();
         mDateButton = (Button)view.findViewById(R.id.toDo_date);
-
-
         mDateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 FragmentManager fragmentManager = getFragmentManager();
@@ -147,6 +152,17 @@ public class ToDoFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+    }
+
+    private void wirePhotoButton(View view) {
+        mPhotoButton = (ImageButton)view.findViewById(R.id.toDoCamera_button);
+        mPhotoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(),ToDoCameraActivity.class);
+                startActivity(i);
             }
         });
     }

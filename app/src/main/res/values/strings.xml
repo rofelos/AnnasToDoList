@@ -13,6 +13,9 @@
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="subtitle">If you see something, say something.</string>
     <string name="delete_todo">Delete</string>
+    <string name="new_checkBox">Add..</string>
+    <string name="ToDo_tasks_label">TASKS</string>
+    <string name="take">Take!</string>
 
 
 </resources>

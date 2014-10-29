@@ -49,7 +49,7 @@ public class DatePickerFragment extends DialogFragment {
     }
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(Bundle savedInstanceState){
         mDate = (Date) getArguments().getSerializable(EXTRA_DATE);
 
 
@@ -63,17 +63,14 @@ public class DatePickerFragment extends DialogFragment {
 
 
         View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_date, null);
-        DatePicker dp = (DatePicker) v.findViewById(R.id.dialog_date_datepicker);
-        dp.init(Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH), new OnDateChangedListener() {
-            @Override
+        DatePicker dp = (DatePicker) v.findViewById(R.id.dialog_date_datePicker);
+        dp.init(year,month,day, new OnDateChangedListener() {
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Log.d(TAG, "datechanged initialized ");
                 mDate = new GregorianCalendar(year, monthOfYear, dayOfMonth).getTime();
                 Log.d(TAG, "date is stored ");
                 Log.d(TAG, "date is" + mDate.toString());
-
+              getArguments().putSerializable(EXTRA_DATE, mDate);
 
             }
         });
